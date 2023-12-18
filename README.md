@@ -135,10 +135,45 @@ Die Zielsetzung wurde erfolgreich erreicht, indem sowohl Authentifizierungs- als
 
 ## Handlungsziel 4: Sicherheitsrelevante Aspekte bei Entwurf, Implementierung und Inbetriebnahme berücksichtigen
 ### Artefakt
-
+![image](https://github.com/cvetkovskiii/CvetkovskiAlekLB-183/assets/91133679/60326e9f-c71b-4481-82c4-34465238d1af)
 
 ### Erklärung
+#### Eingabevalidierung: 
+##### Mailadresse muss ein «@» beinhalten
+Sicherheitsmaßnahme, um sicherzustellen, dass Benutzereingaben für E-Mail-Adressen das "@"-Zeichen enthalten und grundlegende Formatanforderungen erfüllen.
 
+##### SQL-Injection (SQL-I)
+Präventive Maßnahme gegen SQL-Injection-Angriffe, indem Benutzereingaben sicher in SQL-Abfragen integriert werden, um unautorisierten Datenbankzugriff zu verhindern.
+
+#### Ausgabevalidierung: 
+##### XSS (Cross-Site Scripting)
+Schutzmaßnahme, um Benutzereingaben so zu filtern und zu kodieren, dass schädlicher Code nicht in Webseiten eingeschleust und im Browser des Benutzers ausgeführt werden kann.
+
+### Sessionhandling: 
+##### Zufällige IDs
+Sicherheitspraxis, bei der Sitzungs-IDs zufällig generiert werden, um vorhersehbare Sitzungen zu verhindern und somit das Risiko von Sitzungsübernahmen zu minimieren.
+
+### Errorhandling: 
+##### Keine Ausgabe von internen Daten
+Sicherheitsrichtlinie, die sicherstellt, dass bei auftretenden Fehlern keine sensiblen internen Informationen in Fehlermeldungen preisgegeben werden, um das Sicherheitsrisiko zu minimieren.
+
+### Vermeiden von Risiken: 
+#### Möglichst wenig externe Libraries verwenden
+Sicherheitsstrategie, die darauf abzielt, das Angriffsoberfläche zu minimieren und das Risiko von Sicherheitslücken durch die Reduzierung externer Bibliotheken zu verringern.
+
+#### Kein Administrationsinterface auf dem Web
+Schutzmaßnahme, bei der administrative Funktionen nicht über das öffentliche Internet zugänglich sind, um unautorisierten Zugriff und potenzielle Angriffe zu verhindern.
+
+### Architektur: 
+#### Mehrschichtiges Sicherheitssystem
+Sicherheitskonzept, das auf verschiedenen Ebenen der Anwendung mehrere Sicherheitsmechanismen implementiert, um vor verschiedenen Arten von Angriffen zu schützen.
+
+#### Security by Default
+Designprinzip, bei dem Sicherheitsfunktionen integraler Bestandteil der Anwendung sind, ohne dass zusätzliche Konfigurationen erforderlich sind, um die Wahrscheinlichkeit von Sicherheitslücken zu minimieren.
+
+#### Möglichst wenig externe Libraries verwenden
+
+Sicherheitsrichtlinie, die darauf abzielt, das Risiko von Sicherheitslücken durch externe Abhängigkeiten zu verringern, indem die Anzahl der verwendeten externen Bibliotheken minimiert wird.
 
 ### Handlungszielerreichung
 
