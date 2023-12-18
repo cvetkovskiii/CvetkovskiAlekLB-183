@@ -213,10 +213,13 @@ Für einen nicht erfolgreichen Loginversuch könnte eine Logzeile wie folgt auss
 
 **Entwicklung und Debugging:** Entwickler können durch detaillierte Log-Nachrichten leichter Probleme in der Anwendung diagnostizieren und beheben. Dies unterstützt nicht nur die Sicherheit, sondern auch die allgemeine Stabilität der Anwendung.
 
-### Erklärung
-Ich habe anhand von einem Beispiel beschrieben wie eine sinvolle Log-Nachticht aussieht. Ich habe auch beschrieben warum Logging wichtig ist für die Sicherheit
 
 ### Handlungszielerreichung
-Das Artefakt bietet eine solide Basis, um das Handlungsziel zu veranschaulichen. Es verdeutlicht die Bedeutung von Logging für die Sicherheit einer Anwendung, auch wenn einige Aspekte als optional angesehen werden könnten.
+Ich habe anhand von einem Beispiel beschrieben wie eine sinvolle Log-Nachticht aussieht. Ich habe auch beschrieben warum Logging wichtig ist für die Sicherheit
+
 
 ### Beurteilung
+Das Artefakt bietet eine solide Basis und ist teilweise gut umgesetzt., um das Handlungsziel zu veranschaulichen. Es verdeutlicht die Bedeutung von Logging für die Sicherheit einer Anwendung, auch wenn einige Aspekte als optional angesehen werden könnten.
+
+## Selbsteinschätzung 
+Ich glaube, ich habe teilweise die meisten Kompetenzen im Modul erreicht. Die vorgestellten Artefakte und Erklärungen zeigen, dass ich eine solide Grundlage in verschiedenen Sicherheitsaspekten entwickelt habe. Insbesondere die Analyse aktueller Bedrohungen und die Umsetzung von Sicherheitslösungen in meinem Code demonstrieren meine Fähigkeiten auf diesem Gebiet. Trotzdem erkenne ich, dass es noch Raum für Verbesserungen gibt, insbesondere in der Feinabstimmung und dem Verständnis komplexer Sicherheitskonzepte. Die Identifikation feiner Unterschiede zwischen eng miteinander verbundenen Sicherheitsaspekten bleibt eine Herausforderung, die ich weiter angehen möchte. Insgesamt bin ich zuversichtlich, dass ich auf einem guten Weg bin, meine Sicherheitskompetenzen weiter zu entwickeln und zu vertiefen.
