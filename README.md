@@ -45,8 +45,8 @@ Das Artefakt weist eine Sicherheitslücke in Form einer SQL-Injektion auf. Dies 
 
 AFTER: 
 
-        public ActionResult<User> Login(LoginDto request)
-        {
+          public ActionResult<User> Login(LoginDto request)
+         {
             if (request == null || request.Username.IsNullOrEmpty() || request.Password.IsNullOrEmpty())
             {
                 return BadRequest();
@@ -65,7 +65,7 @@ AFTER:
                 return Unauthorized("login failed");
             }
             return Ok(user);
-        }
+         }
 
 ### Handlungszielerreichung
 Ich habe dieses Handlungsziel erreicht, indem ich  anhand von einem Beispiel eine Sicherheitslücke gezeigt habe (BEFORE-Code) und eine mögliche Gegenmassnahme mit Implementierung aufgezeigt habe (AFTER-Code).
@@ -75,44 +75,63 @@ Meiner Meinung nach wurde mein Artefakt erfolgreich umgesetzt, da es eine Umsetz
 
 ## Handlungsziel 3: Mechanismen für die Authentifizierung und Autorisierung umsetzen können
 ### Artefakt
-        private string CreateToken(User user)
-        {
-            string issuer = _configuration.GetSection("Jwt:Issuer").Value!;
-            string audience = _configuration.GetSection("Jwt:Audience").Value!;
 
-            List<Claim> claims = new List<Claim> {
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                    new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString()),
-                    new Claim(JwtRegisteredClaimNames.UniqueName, user.Username),
-                    new Claim(ClaimTypes.Role,  (user.IsAdmin ? "admin" : "user"))
-            };
+     private string CreateToken(User user)
+     {
+        string issuer = _configuration.GetSection("Jwt:Issuer").Value!;
+        string audience = _configuration.GetSection("Jwt:Audience").Value!;
 
-            string base64Key = _configuration.GetSection("Jwt:Key").Value!;
-            SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Convert.FromBase64String(base64Key));
+     List<Claim> claims = new List<Claim>
+     {
+         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+         new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString()),
+         new Claim(JwtRegisteredClaimNames.UniqueName, user.Username),
+         new Claim(ClaimTypes.Role,  (user.IsAdmin ? "admin" : "user"))
+     };
 
-            SigningCredentials credentials = new SigningCredentials(
-                    securityKey,
-                    SecurityAlgorithms.HmacSha512Signature);
+     if (IsUserAuthorized(user, "admin"))
+     {
+         claims.Add(new Claim(ClaimTypes.Role, "admin"));
+     }
 
-            JwtSecurityToken token = new JwtSecurityToken(
-                issuer: issuer,
-                audience: audience,
-                claims: claims,
-                notBefore: DateTime.Now,
-                expires: DateTime.Now.AddDays(1),
-                signingCredentials: credentials
-             );
+     string base64Key = _configuration.GetSection("Jwt:Key").Value!;
+     SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Convert.FromBase64String(base64Key));
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
-        }
+     SigningCredentials credentials = new SigningCredentials(
+        securityKey,
+        SecurityAlgorithms.HmacSha512Signature);
+
+     JwtSecurityToken token = new JwtSecurityToken(
+         issuer: issuer,
+         audience: audience,
+         claims: claims,
+         notBefore: DateTime.Now,
+         expires: DateTime.Now.AddDays(1),
+         signingCredentials: credentials
+     );
+
+     return new JwtSecurityTokenHandler().WriteToken(token);
+     }
+
+     private bool IsUserAuthorized(User user, string requiredRole)
+     {
+     return user.IsAdmin;
+     }
+
+
 
 ### Erklärung
+#### Authentifizierung
+Hier sieht man die Implementierung der Erstellung eines JSON Web Tokens (JWT) als Mechanismus zur Authentifizierung. Als eine URL-sichere Methode ermöglicht ein JWT den Austausch von Informationen zwischen Parteien. In diesem Kontext dient der JWT der Authentifizierung eines Benutzers. Im Allgemeinen werden JWTs verwendet, um bei wiederholten Anfragen an den Server zu prüfen, ob der Benutzer berechtigt ist, ohne dabei jedes Mal die Benutzerdaten erneut abzufragen.
 
+#### Autorisierung
+Die Methode IsUserAuthorized repräsentiert einen Teil der Autorisierung. Sie wird aufgerufen, um zu überprüfen, ob der Benutzer autorisiert ist. Hier wird die Rolle "admin" zum Token hinzugefügt, wenn die Methode IsUserAuthorized dies bestätigt.
 
 ### Handlungszielerreichung
-
+Die Umsetzung des Handlungsziels wurde erreicht, indem die Authentifizierung durch die JWT-Erstellung und die Autorisierung durch die Überprüfung der Benutzerberechtigungen implementiert wurden. Die Autorisierung wird hier anhand der Benutzerrolle "admin" behandelt.
 
 ### Beurteilung
+Die Zielsetzung wurde erfolgreich erreicht, indem sowohl Authentifizierungs- als auch Autorisierungsmechanismen implementiert wurden. Die Verwendung von JWTs ermöglicht eine sichere Identifizierung von Benutzern, während die Autorisierung sicherstellt, dass bestimmte Aktionen nur von autorisierten Benutzern durchgeführt werden können. Obwohl das Beispiel sich auf die Rolle "admin" konzentriert, bietet die Struktur Raum für eine erweiterte Rollenverwaltung, um unterschiedliche Berechtigungen zu unterstützen.
 
 ## Handlungsziel 4: Sicherheitsrelevante Aspekte bei Entwurf, Implementierung und Inbetriebnahme berücksichtigen
 ### Artefakt
