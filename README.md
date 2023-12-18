@@ -186,12 +186,37 @@ Obwohl grundlegende Sicherheitsmassnahmen wie die Validierung von E-Mail-Adresse
 
 ## Handlungsziel 5: Informationen für Auditing und Logging generieren & Auswertungen und Alarme definieren und implementieren
 ### Artefakt
+Teilauftrag 1 von LA_183_17_Logging
 
+Für einen nicht erfolgreichen Loginversuch könnte eine Logzeile wie folgt aussehen:
+
+**2023-08-28T14:54:37Z M183.Controllers.LoginController: Warning: login attempt failed for user 'administrator'. Access denied.**
+
+#### Legende:
+
+**Wann:** Zeitpunkt der Log-Nachricht (2023-08-28T14:54:37Z).
+**Was:** Warnung (Warning) für einen nicht erfolgreichen Loginversuch.
+**Wo:** Klasse und Methode, die das Ereignis ausgelöst haben (M183.Controllers.LoginController).
+**Wer:** Benutzername des betroffenen Nutzers (administrator).
+**Resultat:** Zugriffsverweigerung (Access denied).
+
+#### Begründung für den Level:
+
+**Warning:** Ein nicht erfolgreicher Loginversuch deutet auf einen potenziellen Sicherheitsvorfall hin, der Aufmerksamkeit erfordert. Das Warning-Level ist angemessen, um darauf hinzuweisen, dass ein unerwünschtes Ereignis aufgetreten ist.
+
+#### Wieso ist Logging wichtig für die Sicherheit?
+**Früherkennung von Sicherheitsproblemen:** Logging ermöglicht es, verdächtige Aktivitäten oder ungewöhnliche Muster frühzeitig zu erkennen. Dies ist entscheidend, um potenzielle Sicherheitsbedrohungen zu identifizieren, bevor sie zu ernsthaften Problemen werden.
+
+**Diagnose von Sicherheitsvorfällen:** Im Falle eines Sicherheitsvorfalls liefert Logging wichtige Informationen zur Analyse des Vorfalls. Detaillierte Log-Einträge ermöglichen es Sicherheitsteams, den Ursprung und den Verlauf von Angriffen nachzuvollziehen.
+
+**Auditierung und Compliance:** Logging ist oft notwendig, um den gesetzlichen Anforderungen und Compliance-Vorschriften zu entsprechen. Durch das Protokollieren von Benutzeraktivitäten können Unternehmen nachweisen, dass sie angemessene Sicherheitsmaßnahmen ergriffen haben.
+
+**Entwicklung und Debugging:** Entwickler können durch detaillierte Log-Nachrichten leichter Probleme in der Anwendung diagnostizieren und beheben. Dies unterstützt nicht nur die Sicherheit, sondern auch die allgemeine Stabilität der Anwendung.
 
 ### Erklärung
-
+Ich habe anhand von einem Beispiel beschrieben wie eine sinvolle Log-Nachticht aussieht. Ich habe auch beschrieben warum Logging wichtig ist für die Sicherheit
 
 ### Handlungszielerreichung
-
+Das Artefakt bietet eine solide Basis, um das Handlungsziel zu veranschaulichen. Es verdeutlicht die Bedeutung von Logging für die Sicherheit einer Anwendung, auch wenn einige Aspekte als optional angesehen werden könnten.
 
 ### Beurteilung
