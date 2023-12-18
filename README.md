@@ -16,3 +16,51 @@ Ich habe das Handlungsziel erreicht, da das Artefakt eine umfassende Analyse ver
 
 ### Rückblick
 Die Umsetzung des Artefakts war erfolgreich, da es eine detaillierte Analyse der Sicherheitsszenarien bietet und die Auswirkungen auf die Schutzziele bewertet. Es ermöglicht eine fundierte Beurteilung der Bedrohungen in Bezug auf Vertraulichkeit, Integrität und Verfügbarkeit. Durch die Berücksichtigung von OWASP-Richtlinien wird zudem ein umfassender Einblick in aktuelle Sicherheitspraktiken gewährleistet.
+
+## Handlungsziel 2: Sicherheitslücken und ihre Ursachen in einer Applikation erkennen können
+### Artefakt
+
+
+### Erklärung
+
+
+### Handlungszielerreichung
+
+
+### Rückblick
+
+## Handlungsziel 3: Mechanismen für die Authentifizierung und Autorisierung umsetzen können
+### Artefakt
+
+
+### Erklärung
+
+
+### Handlungszielerreichung
+
+
+### Rückblick
+
+## Handlungsziel 4: Sicherheitsrelevante Aspekte bei Entwurf, Implementierung und Inbetriebnahme berücksichtigen
+### Artefakt
+
+
+### Erklärung
+
+
+### Handlungszielerreichung
+
+
+### Rückblick
+
+## Handlungsziel 5: Informationen für Auditing und Logging generieren & Auswertungen und Alarme definieren und implementieren
+### Artefakt
+
+
+### Erklärung
+
+
+### Handlungszielerreichung
+
+
+### Rückblick
