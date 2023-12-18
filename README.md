@@ -14,7 +14,7 @@ Das Artefakt bietet eine Bewertung von fünf Sicherheitsszenarien in Bezug auf d
 ### Handlungszielerreichung
 Ich habe das Handlungsziel erreicht, da das Artefakt eine umfassende Analyse verschiedener Sicherheitsszenarien enthält und deren Auswirkungen auf die Schutzziele Vertraulichkeit, Integrität und Verfügbarkeit aufzeigt.
 
-### Rückblick
+### Beurteilung
 Die Umsetzung des Artefakts war erfolgreich, da es eine detaillierte Analyse der Sicherheitsszenarien bietet und die Auswirkungen auf die Schutzziele bewertet. Es ermöglicht eine fundierte Beurteilung der Bedrohungen in Bezug auf Vertraulichkeit, Integrität und Verfügbarkeit. Durch die Berücksichtigung von OWASP-Richtlinien wird zudem ein umfassender Einblick in aktuelle Sicherheitspraktiken gewährleistet.
 
 ## Handlungsziel 2: Sicherheitslücken und ihre Ursachen in einer Applikation erkennen können
@@ -41,7 +41,7 @@ BEFORE:
         }
 
 ### Erklärung
-Das Artefakt hat eine SQL-Injektion Sicherheitslücke, das heisst, dass es aus den Eingaben direkt ein SQL String erstellt wird, das hat zur Folge, dass der SQL String nach Belieben verändert werden kann. Wie z.B "'; DROP TABLE *; --". Um dies zu verhindern, habe ich direkt den User gefiltert, anstatt einen String zu machen. 
+Das Artefakt weist eine Sicherheitslücke in Form einer SQL-Injektion auf. Dies bedeutet, dass aus den Benutzereingaben direkt ein SQL-String erstellt wird, was zur Folge hat, dass der SQL-String nach Belieben verändert werden kann. Ein Beispiel hierfür wäre "'; DROP TABLE *; --". Um dieser Problematik vorzubeugen, habe ich nun eine direkte Benutzerfilterung implementiert, anstatt einen reinen String zu generieren.
 
 AFTER: 
 
@@ -70,12 +70,41 @@ AFTER:
 ### Handlungszielerreichung
 Ich habe dieses Handlungsziel erreicht, indem ich  anhand von einem Beispiel eine Sicherheitslücke gezeigt habe (BEFORE-Code) und eine mögliche Gegenmassnahme mit Implementierung aufgezeigt habe (AFTER-Code).
 
-### Rückblick
+### Beurteilung
 Meiner Meinung nach wurde mein Artefakt erfolgreich umgesetzt, da es eine Umsetzung mit einer Sicherheitslücke zeigt und gleichzeitig Lösungsansätze zur Verbesserung aufzeigt. Es konzentriert sich zwar nur auf die Darstellung von Injection, obwohl es noch zahlreiche andere potenzielle Sicherheitslücken gibt. Dennoch halte ich es für entscheidend, Injection zu verhindern, und es genügt meiner Ansicht nach, nicht jede Sicherheitslücke im Artefakt explizit zu behandeln.
 
 ## Handlungsziel 3: Mechanismen für die Authentifizierung und Autorisierung umsetzen können
 ### Artefakt
+        private string CreateToken(User user)
+        {
+            string issuer = _configuration.GetSection("Jwt:Issuer").Value!;
+            string audience = _configuration.GetSection("Jwt:Audience").Value!;
 
+            List<Claim> claims = new List<Claim> {
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString()),
+                    new Claim(JwtRegisteredClaimNames.UniqueName, user.Username),
+                    new Claim(ClaimTypes.Role,  (user.IsAdmin ? "admin" : "user"))
+            };
+
+            string base64Key = _configuration.GetSection("Jwt:Key").Value!;
+            SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Convert.FromBase64String(base64Key));
+
+            SigningCredentials credentials = new SigningCredentials(
+                    securityKey,
+                    SecurityAlgorithms.HmacSha512Signature);
+
+            JwtSecurityToken token = new JwtSecurityToken(
+                issuer: issuer,
+                audience: audience,
+                claims: claims,
+                notBefore: DateTime.Now,
+                expires: DateTime.Now.AddDays(1),
+                signingCredentials: credentials
+             );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
 
 ### Erklärung
 
@@ -83,7 +112,7 @@ Meiner Meinung nach wurde mein Artefakt erfolgreich umgesetzt, da es eine Umsetz
 ### Handlungszielerreichung
 
 
-### Rückblick
+### Beurteilung
 
 ## Handlungsziel 4: Sicherheitsrelevante Aspekte bei Entwurf, Implementierung und Inbetriebnahme berücksichtigen
 ### Artefakt
@@ -95,7 +124,7 @@ Meiner Meinung nach wurde mein Artefakt erfolgreich umgesetzt, da es eine Umsetz
 ### Handlungszielerreichung
 
 
-### Rückblick
+### Beurteilung
 
 ## Handlungsziel 5: Informationen für Auditing und Logging generieren & Auswertungen und Alarme definieren und implementieren
 ### Artefakt
@@ -107,4 +136,4 @@ Meiner Meinung nach wurde mein Artefakt erfolgreich umgesetzt, da es eine Umsetz
 ### Handlungszielerreichung
 
 
-### Rückblick
+### Beurteilung
